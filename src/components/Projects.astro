@@ -1,0 +1,36 @@
+---
+// src/components/Projects.astro
+import type { Project } from "../data/portfolio";
+
+interface Props {
+  projects: Project[];
+}
+
+const { projects } = Astro.props;
+---
+
+<section id="projects">
+  <div class="section-label">projects</div>
+  <h2 class="section-title">Selected Work</h2>
+
+  <div class="projects-grid">
+    {projects.map(p => (
+      <div class="project-card">
+        <div class="project-card-top">
+          <div class="project-icon">{p.index}</div>
+          <div class="project-links">
+            {p.github  && <a href={p.github}  class="project-link" target="_blank" rel="noopener">github</a>}
+            {p.demo    && <a href={p.demo}    class="project-link" target="_blank" rel="noopener">demo</a>}
+            {p.writeup && <a href={p.writeup} class="project-link" target="_blank" rel="noopener">writeup</a>}
+            {p.blog    && <a href={p.blog}    class="project-link" target="_blank" rel="noopener">blog</a>}
+          </div>
+        </div>
+        <div class="project-name">{p.name}</div>
+        <div class="project-desc">{p.desc}</div>
+        <div class="project-stack">
+          {p.stack.map(s => <span class="stack-tag">{s}</span>)}
+        </div>
+      </div>
+    ))}
+  </div>
+</section>

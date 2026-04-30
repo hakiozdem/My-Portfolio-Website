@@ -1,0 +1,28 @@
+---
+// src/components/Education.astro
+import type { Degree } from "../data/portfolio";
+
+interface Props {
+  education: Degree[];
+}
+
+const { education } = Astro.props;
+---
+
+<section id="education">
+  <div class="section-label">education</div>
+  <h2 class="section-title">Academic Background</h2>
+
+  <div class="edu-grid">
+    {education.map(e => (
+      <div class="edu-card">
+        <div class="edu-year">{e.period}</div>
+        <div class="edu-body">
+          <div class="edu-degree">{e.degree}</div>
+          <div class="edu-institution">{e.institution}</div>
+          {e.note && <div class="edu-note">{e.note}</div>}
+        </div>
+      </div>
+    ))}
+  </div>
+</section>

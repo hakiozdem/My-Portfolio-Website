@@ -1,0 +1,40 @@
+---
+// src/components/Experience.astro
+import type { Job } from "../data/portfolio";
+
+interface Props {
+  experience: Job[];
+}
+
+const { experience } = Astro.props;
+---
+
+<section id="experience">
+  <div class="section-label">work experience</div>
+  <h2 class="section-title">Where I've Worked</h2>
+
+  <div class="prompt">
+    <span class="prompt-user">user</span><span style="color:var(--text-dim)">@</span><span
+      class="prompt-host">sec</span><span style="color:var(--text-dim)">:</span><span
+      class="prompt-path">~/career</span><span style="color:var(--text-dim)">$</span>
+    <span style="color:var(--text)">cat history.log</span>
+  </div>
+
+  <div class="timeline">
+    {experience.map(job => (
+      <div class="timeline-item">
+        <div class="timeline-line"></div>
+        <div class="timeline-content">
+          <div class="timeline-header">
+            <div class="job-title">{job.title}</div>
+            <div class="job-period">{job.period}</div>
+          </div>
+          <div class="job-company"><span>{job.company}</span> · {job.type}</div>
+          <ul class="job-bullets">
+            {job.bullets.map(b => <li>{b}</li>)}
+          </ul>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>

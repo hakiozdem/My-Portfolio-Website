@@ -1,0 +1,26 @@
+---
+// src/components/Certifications.astro
+import type { Cert } from "../data/portfolio";
+
+interface Props {
+  certifications: Cert[];
+}
+
+const { certifications } = Astro.props;
+---
+
+<section id="certifications">
+  <div class="section-label">certifications</div>
+  <h2 class="section-title">Credentials</h2>
+
+  <div class="cert-grid">
+    {certifications.map(c => (
+      <div class="cert-card">
+        <div class="cert-badge">{c.badge}</div>
+        <div class="cert-name">{c.name}</div>
+        <div class="cert-issuer">{c.issuer}</div>
+        <div class="cert-year">{c.year}</div>
+      </div>
+    ))}
+  </div>
+</section>

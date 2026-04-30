@@ -1,0 +1,28 @@
+---
+// src/components/Volunteer.astro
+import type { VolunteerRole } from "../data/portfolio";
+
+interface Props {
+  volunteer: VolunteerRole[];
+}
+
+const { volunteer } = Astro.props;
+---
+
+<section id="volunteer">
+  <div class="section-label">volunteer experience</div>
+  <h2 class="section-title">Giving Back</h2>
+
+  <div class="volunteer-list">
+    {volunteer.map(v => (
+      <div class="vol-item">
+        <div class="vol-accent"></div>
+        <div class="vol-body">
+          <div class="vol-role">{v.role}</div>
+          <div class="vol-org">{v.org} <span>{v.period}</span></div>
+          <div class="vol-desc">{v.desc}</div>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>

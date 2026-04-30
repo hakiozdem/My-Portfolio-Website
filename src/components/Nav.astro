@@ -1,0 +1,18 @@
+---
+// src/components/Nav.astro
+const links = [
+  { href: "#about",          label: "about"    },
+  { href: "#experience",     label: "work"     },
+  { href: "#projects",       label: "projects" },
+  { href: "#education",      label: "education"},
+  { href: "#certifications", label: "certs"    },
+  { href: "#volunteer",      label: "volunteer"},
+];
+---
+
+<nav>
+  <div class="nav-logo"><span>~/</span>portfolio</div>
+  <ul class="nav-links">
+    {links.map(l => <li><a href={l.href}>{l.label}</a></li>)}
+  </ul>
+</nav>

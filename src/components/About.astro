@@ -1,0 +1,41 @@
+---
+// src/components/About.astro
+import type { personal as PersonalType } from "../data/portfolio";
+
+interface Props {
+  personal: typeof PersonalType;
+  skills: string[];
+  highlightedSkillCount: number;
+}
+
+const { personal, skills, highlightedSkillCount } = Astro.props;
+---
+
+<section id="about">
+  <div class="hero-eyebrow">cybersecurity professional</div>
+  <h1>{personal.name}</h1>
+  <div class="hero-subtitle">{personal.title}</div>
+  <p class="hero-bio">{personal.bio}</p>
+
+  <div class="hero-tags">
+    {skills.map((skill, i) => (
+      <span class={`tag${i < highlightedSkillCount ? " highlight" : ""}`}>{skill}</span>
+    ))}
+  </div>
+
+  <div class="hero-cta">
+    <a href={`mailto:${personal.email}`} class="btn btn-primary">Contact Me</a>
+    <a href="#experience" class="btn btn-ghost">View Experience</a>
+  </div>
+
+  <div class="status-bar">
+    <div class="status-dot"></div>
+    {personal.available && <span>Available for engagements</span>}
+    <span>·</span>
+    <span>Based in {personal.location}</span>
+    <span>·</span>
+    <a href={personal.linkedin} target="_blank" rel="noopener">linkedin</a>
+    <span>·</span>
+    <a href={personal.github} target="_blank" rel="noopener">github</a>
+  </div>
+</section>
