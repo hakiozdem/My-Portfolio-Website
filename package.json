@@ -6,15 +6,12 @@
     "node": ">=22.12.0"
   },
   "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro"
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx,.astro"
   },
   "dependencies": {
     "astro": "^6.2.1"
   },
-  "scripts": {
-  "lint": "eslint . --ext .js,.jsx,.ts,.tsx,.astro"
-}
+  "devDependencies": {
+    "eslint": "^10.2.1"
+  }
 }
