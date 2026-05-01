@@ -21,7 +21,7 @@ permissions:
 # Tüm job'lar için ortak env değişkenleri
 env:
   AWS_REGION: us-east-1
-  NODE_VERSION: '20'
+  NODE_VERSION: '22'
 
 jobs:
   deploy:
