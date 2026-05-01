@@ -1,0 +1,141 @@
+name: Production Deploy
+
+# main branch'e push olduğunda tetikleniyor
+# pull_request değil push çünkü merge sonrası prod'a gitmesi gerekiyor
+on:
+  push:
+    branches:
+      - main
+    # docs veya readme değişikliklerinde deploy istemiyorsan:
+    paths-ignore:
+      - '**.md'
+      - '.gitignore'
+
+# Workflow'un GitHub token'ının kapsamı
+# id-token: OIDC için zorunlu (AWS'e auth)
+# contents: read repo'yu okuyabilmek için
+permissions:
+  id-token: write
+  contents: read
+
+# Tüm job'lar için ortak env değişkenleri
+env:
+  AWS_REGION: us-east-1
+  NODE_VERSION: '20'
+
+jobs:
+  deploy:
+    name: Build and Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Repo'yu runner'a indir
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Node.js kurulumu + npm cache
+      # cache: 'npm' otomatik olarak package-lock.json'ı baz alıp cache yönetir
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      # 3. Bağımlılıkları kur
+      # npm ci kullanıyoruz çünkü:
+      #   - Lock file'a sadık kalır
+      #   - npm install'dan hızlı
+      #   - CI ortamı için tasarlanmış
+      - name: Install dependencies
+        run: npm ci
+
+      # 4. Lint check
+      # package.json'da "lint" script'in olmalı (eslint vs.)
+      - name: Run linter
+        run: npm run lint
+
+      # 5. Bağımlılık zafiyet taraması
+      # high ve üstü zafiyetlerde fail eder
+      # moderate'da uyarıp geçer (CI'ı sürekli durdurmamak için)
+      - name: Audit dependencies
+        run: npm audit --audit-level=high
+
+      # 6. Secret scanning - Gitleaks
+      # Repo'da yanlışlıkla commit edilmiş AWS key, API token vs. arar
+      - name: Run Gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # 7. Filesystem güvenlik taraması - Trivy
+      # Misconfig, vulnerability, secret için tarar
+      # severity: critical zafiyetlerde fail eder
+      - name: Run Trivy filesystem scan
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          severity: 'CRITICAL,HIGH'
+          exit-code: '1'
+          ignore-unfixed: true
+
+      # 8. SAST - Semgrep
+      # Kod pattern'larında güvenlik anti-pattern'ları arar
+      - name: Run Semgrep
+        uses: returntocorp/semgrep-action@v1
+        with:
+          config: 'p/security-audit p/secrets'
+
+      # 9. Astro build
+      # dist/ klasörü oluşur
+      - name: Build Astro site
+        run: npm run build
+
+      # 10. AWS credentials - OIDC ile role assume
+      # Hiçbir secret access key kullanmıyoruz, federated identity
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+          # Role session ismi log'larda görünür, audit için faydalı
+          role-session-name: GitHubActions-ProductionDeploy
+
+      # 11. S3'e sync
+      # --delete: bucket'ta olup dist'te olmayan dosyaları siler
+      # --cache-control: HTML için kısa, asset'ler için uzun cache
+      # Astro fingerprinted asset'ler ürettiği için asset'ler güvenle uzun cache'lenebilir
+      - name: Deploy HTML files to S3
+        run: |
+          aws s3 sync dist/ s3://${{ secrets.S3_PROD_BUCKET }}/ \
+            --delete \
+            --exclude "*" \
+            --include "*.html" \
+            --cache-control "public, max-age=0, must-revalidate"
+
+      - name: Deploy assets to S3
+        run: |
+          aws s3 sync dist/ s3://${{ secrets.S3_PROD_BUCKET }}/ \
+            --exclude "*.html" \
+            --cache-control "public, max-age=31536000, immutable"
+
+      # 12. CloudFront cache invalidation
+      # /* ile tüm cache'i temizliyoruz
+      # Maliyet uyarısı: ayda ilk 1000 path ücretsiz, sonrası ücretli
+      # Daha optimal: sadece değişen dosyaları invalidate et (advanced)
+      - name: Invalidate CloudFront cache
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id ${{ secrets.CLOUDFRONT_PROD_ID }} \
+            --paths "/*"
+
+      # 13. Deployment özetini job summary'de göster
+      # Actions UI'da bu workflow run'ında görüntülenir
+      - name: Deployment summary
+        if: success()
+        run: |
+          echo "### Deployment Successful 🚀" >> $GITHUB_STEP_SUMMARY
+          echo "- **Environment:** Production" >> $GITHUB_STEP_SUMMARY
+          echo "- **URL:** https://sitename.dev" >> $GITHUB_STEP_SUMMARY
+          echo "- **Commit:** ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Triggered by:** ${{ github.actor }}" >> $GITHUB_STEP_SUMMARY

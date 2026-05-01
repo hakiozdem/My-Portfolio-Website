@@ -1,0 +1,103 @@
+name: PR Preview Deploy
+
+on:
+  pull_request:
+    branches:
+      - master
+    # PR açılma, güncellenme, ve tekrar açılmada tetikle
+    # closed da ekleyebilirsin ama o zaman cleanup mantığı yazman gerekir
+    types: [opened, synchronize, reopened]
+
+permissions:
+  id-token: write
+  contents: read
+  # PR'a comment yazabilmek için
+  pull-requests: write
+
+env:
+  AWS_REGION: us-east-1
+  NODE_VERSION: '20'
+
+jobs:
+  preview:
+    name: Build and Deploy Preview
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run linter
+        run: npm run lint
+
+      - name: Audit dependencies
+        run: npm audit --audit-level=high
+
+      - name: Run Gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Run Trivy filesystem scan
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          severity: 'CRITICAL,HIGH'
+          exit-code: '1'
+          ignore-unfixed: true
+
+      # PR build'lerinde Astro'ya base path veriyoruz
+      # /pr-42/ gibi bir path altında deploy edileceği için
+      # site bu prefix'i bilmek zorunda
+      - name: Build Astro site
+        env:
+          ASTRO_BASE: /pr-${{ github.event.pull_request.number }}
+        run: npm run build
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+          role-session-name: GitHubActions-PRPreview-${{ github.event.pull_request.number }}
+
+      # Preview bucket'a PR-specific path altında deploy
+      - name: Deploy to preview bucket
+        run: |
+          aws s3 sync dist/ s3://${{ secrets.S3_PREVIEW_BUCKET }}/pr-${{ github.event.pull_request.number }}/ \
+            --delete \
+            --cache-control "public, max-age=0, must-revalidate"
+
+      - name: Invalidate CloudFront preview cache
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id ${{ secrets.CLOUDFRONT_PREVIEW_ID }} \
+            --paths "/pr-${{ github.event.pull_request.number }}/*"
+
+      # PR'a preview URL'i comment olarak yaz
+      # Eğer aynı PR'da daha önce comment varsa update eder, yenisini açmaz
+      - name: Comment preview URL on PR
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          header: preview-deployment
+          message: |
+            ### 🔍 Preview Deployment Ready
+
+            **Preview URL:** https://preview.sitename.dev/pr-${{ github.event.pull_request.number }}/
+
+            | | |
+            |---|---|
+            | **Commit** | `${{ github.event.pull_request.head.sha }}` |
+            | **Updated** | `${{ github.event.pull_request.updated_at }}` |
+
+            > Bu preview PR kapatıldığında otomatik temizlenmez. Manuel cleanup için workflow ekleyebilirsin.
