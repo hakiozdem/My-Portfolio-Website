@@ -43,7 +43,7 @@ export const experience: Job[] = [
     period:  "January 2026 — present",
     bullets: [
       "Designed a risk scoring form to quantify the risk of bulk entitlement distributions across multiple roles, enabling data-driven evaluation before high-impact provisioning operations",
-      "Built Excel VBA macros to streamline repetitive email operations, applying scripting solutions within constraints of business-user tooling",
+      "Built Excel VBA macros to streamline repetitive email operations, applying scripting solutions within constraints of business-user tooling.",
     ],
   },
   {
