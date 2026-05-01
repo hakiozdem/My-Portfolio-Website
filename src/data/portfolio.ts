@@ -3,22 +3,22 @@
 // ─────────────────────────────────────────────────────────────
 
 export const personal = {
-  name:       "John Doe",
-  title:      "Penetration Tester & Security Engineer",
+  name:       "Haktan Özdemir",
+  title:      "Identity Governance Analyst",
   bio:        "I break things so others can't. With 6+ years securing enterprise infrastructure, I specialize in offensive security, red team operations, and helping organizations understand their real attack surface before adversaries do.",
-  location:   "City, Country",
-  email:      "john@example.com",
-  linkedin:   "https://linkedin.com/in/johndoe",
-  github:     "https://github.com/johndoe",
+  location:   "Istanbul, Türkiye",
+  linkedin:   "https://www.linkedin.com/in/haktanozdemir",
+  github:     "https://github.com/hakiozdem",
   available:  true,
 };
 
 export const skills: string[] = [
-  "Penetration Testing",
-  "Red Team Ops",
-  "Threat Intelligence",
-  "SIEM / SOC",
-  "Malware Analysis",
+  "Identity Governance",
+  "Information Security",
+  "Advanced Data Analytics",
+  "Python/SQL",
+  "Advanced Excel Techniques (Macros, PowerQuery, PowerPivot)",
+  "DevOps",
   "Cloud Security",
   "Python / Bash",
 ];
@@ -37,35 +37,58 @@ export interface Job {
 
 export const experience: Job[] = [
   {
-    title:   "Senior Penetration Tester",
-    company: "CyberGuard Solutions",
+    title:   "Authorization Process and Management - Associate",
+    company: "Garanti BBVA",
+    type:    "Full-time · Hybrid",
+    period:  "January 2026 — present",
+    bullets: [
+      "Designed a risk scoring form to quantify the risk of bulk entitlement distributions across multiple roles, enabling data-driven evaluation before high-impact provisioning operations",
+      "Built Excel VBA macros to streamline repetitive email operations, applying scripting solutions within constraints of business-user tooling",
+    ],
+  },
+  {
+    title:   "Authorization Process and Management - Analyst",
+    company: "Garanti BBVA",
+    type:    "Full-time · Hybrid",
+    period:  "August 2024 — December 2025",
+    bullets: [
+      "Implemented and maintaining role-based access control (RBAC) models and role matrices",
+      "Managed user authorization processes in a secure and sustainable way",
+      "Engineered a Python-based data pipeline to consolidate access review inputs from multiple upstream systems, eliminating manual data wrangling and cutting preparation time by 80% (10 days → 2 days)",
+      "Detected 10M+ data discrepancies between two source systems through a single cross-database SQL reconciliation query, exposing a significant synchronization gap impacting downstream governance processes"
+    ],
+  },
+  {
+    title:   "Cyber Security Project Assistant",
+    company: "KoçSistem",
     type:    "Full-time · Remote",
-    period:  "2022 — present",
+    period:  "December 2023 — June 2024",
     bullets: [
-      "Led external and internal network penetration tests for Fortune 500 clients, identifying critical vulnerabilities and reducing average risk score by 40%.",
-      "Developed custom exploit scripts and post-exploitation tooling for red team engagements using Python and PowerShell.",
-      "Authored comprehensive technical reports and executive summaries for C-suite stakeholders.",
+      "Worked at two different teams: InfoSec and Network Security",
+      "In Information Security team I worked with ForcePoint DLP solution, IBM Guardium Data Protection and ProofPoint Security Awareness Training Platform",
+      "In Network Security team, I have handled tickets for various products such as firewalls and VPNs",
+      "Automated DNS query operations using Python, reducing manual processing time from 4 hours to 5 minutes (~98% efficiency gain)",
+      "Participated in the Cybersecurity training prepared by the Boğaziçi Cybersecurity Community and KoçSistem."
     ],
   },
   {
-    title:   "Security Analyst II",
-    company: "FinSecure Bank",
-    type:    "Full-time · On-site",
-    period:  "2020 — 2022",
+    title:   "System Engineer Intern",
+    company: "WGuard",
+    type:    "Internship · Remote",
+    period:  "July 2023 — September 2023",
     bullets: [
-      "Monitored SIEM alerts across a hybrid cloud environment, triaging and escalating high-severity incidents within SLA windows.",
-      "Conducted vulnerability assessments of internal web applications using Burp Suite and OWASP methodology.",
-      "Collaborated with DevOps to integrate SAST/DAST tools into CI/CD pipelines, reducing production vulnerabilities by 60%.",
+      "Received training on topics such as Active Directory, Windows Server, Linux Server, Backup Technologies (Veeam, Acronis), Monitoring Technologies (ManageEngine, Zabbix), Virtualization (VMWare, VirtualBox, HyperV)",
+      "Installed Veeam and Zabbix on virtual machines and reviewed their documentation.",
+      "Attended sales meetings to learn about other products"
     ],
   },
   {
-    title:   "Junior Security Analyst",
-    company: "NetSafe Corp",
-    type:    "Full-time · On-site",
-    period:  "2018 — 2020",
+    title:   "Intern",
+    company: "Garanti BBVA",
+    type:    "Internship · Hybrid",
+    period:  "July 2022 — September 2022",
     bullets: [
-      "Performed first-line triage of security alerts and participated in incident response exercises.",
-      "Maintained and tuned IDS/IPS rulesets, reducing false positive rate by 35%.",
+      "I did a short-term internship in the Authorization Processes and Management team.",
     ],
   },
 ];
@@ -85,47 +108,23 @@ export interface Project {
 export const projects: Project[] = [
   {
     index:  "[01]",
-    name:   "PhishNet Detector",
-    desc:   "ML-powered phishing URL classification engine with 97.3% accuracy, trained on a dataset of 500k URLs.",
-    stack:  ["Python", "scikit-learn", "FastAPI"],
-    github: "https://github.com/johndoe/phishnet",
-    demo:   "#",
+    name:   "My Portfolio Website and Deployment Pipeline",
+    desc:   "(github and blog will be Included soon)",
+    stack:  ["Astro", "AWS", "Github Actions"],
   },
   {
     index:  "[02]",
-    name:   "RedOps C2 Framework",
-    desc:   "Lightweight command-and-control framework for red team operations with encrypted comms over DNS tunnelling.",
-    stack:  ["Go", "DNS", "AES-256"],
-    github: "https://github.com/johndoe/redops",
+    name:   "Open-Source and Cheap CI/CD Pipeline for Small Companies",
+    desc:   "Completely automated CI/CD Pipeline and deployed a website which contains its own authorization system. (github will be added soon)",
+    stack:  ["Python-Flask", "Vagrant", "Jenkins","SonarQube","Kubernetes","Docker"],
   },
   {
     index:  "[03]",
-    name:   "CloudEnum",
-    desc:   "Automated S3/Azure Blob/GCS bucket enumeration and misconfiguration scanner used in cloud security assessments.",
-    stack:  ["Python", "AWS SDK", "Azure"],
-    github: "https://github.com/johndoe/cloudenum",
-  },
-  {
-    index:  "[04]",
-    name:   "CTF Writeups",
-    desc:   "Collection of 40+ detailed write-ups from HackTheBox, TryHackMe, and CTF competitions covering web, pwn, crypto, and forensics.",
-    stack:  ["HackTheBox", "CTF", "Web / Pwn"],
-    writeup: "#",
-  },
-  {
-    index:  "[05]",
-    name:   "SIEM Rule Engine",
-    desc:   "Sigma-based detection rule converter and testing harness for Splunk, Elastic, and Microsoft Sentinel.",
-    stack:  ["Python", "Sigma", "Splunk"],
-    github: "https://github.com/johndoe/siem-rules",
-  },
-  {
-    index:  "[06]",
-    name:   "AD Attack Mapper",
-    desc:   "Interactive Active Directory attack path visualizer that maps BloodHound data to MITRE ATT&CK techniques.",
-    stack:  ["Neo4j", "BloodHound", "D3.js"],
-    blog:   "#",
-  },
+    name:   "Türk Telekom Cloud Computing Camp Final Project",
+    desc:   "Manuel deployment of a website with Docker & Kubernetes",
+    stack:  ["Python-Flask","Kubernetes","Docker"],
+    github: "https://github.com/hakiozdem/bbk-final-project",
+  }
 ];
 
 // ─── EDUCATION ────────────────────────────────────────────────
@@ -138,16 +137,20 @@ export interface Degree {
 
 export const education: Degree[] = [
   {
-    period:      "2016–2018",
-    degree:      "M.Sc. Information Security",
-    institution: "Royal Holloway, University of London",
-    note:        "Dissertation: Adversarial Machine Learning Attacks on Intrusion Detection Systems. Graduated with Distinction.",
+    period:      "2020–2024",
+    degree:      "Bachelor of Computer Engineering",
+    institution: "Manisa Celal Bayar University",
+    note:        "Graduated as Honor Student. GPA: 3.12",
   },
   {
-    period:      "2012–2016",
-    degree:      "B.Sc. Computer Science",
-    institution: "University of [City]",
-    note:        "Major in Networks & Systems Security. First Class Honours. Final year project: Port knocking implementation on Linux.",
+    period:      "2022–2024",
+    degree:      "Human Resources Management",
+    institution: "Anadolu University",
+  },
+  {
+    period:      "2018–2020",
+    degree:      "Bachelor of Materials Science and Engineering",
+    institution: "İzmir Institute of Technology",
   },
 ];
 
@@ -160,12 +163,9 @@ export interface Cert {
 }
 
 export const certifications: Cert[] = [
-  { badge: "OSCP",  name: "Offensive Security Certified Professional",     issuer: "Offensive Security", year: "2021" },
-  { badge: "CISSP", name: "Certified Information Systems Security Professional", issuer: "ISC²",          year: "2022" },
-  { badge: "CEH",   name: "Certified Ethical Hacker",                      issuer: "EC-Council",         year: "2020" },
-  { badge: "AWS",   name: "AWS Security Specialty",                        issuer: "Amazon Web Services", year: "2023" },
-  { badge: "SC+",   name: "CompTIA Security+",                             issuer: "CompTIA",            year: "2019" },
-  { badge: "eJPT",  name: "eLearnSecurity Junior Penetration Tester",      issuer: "eLearnSecurity",     year: "2018" },
+  { badge: "CCNA",  name: "Cisco Certified Network Associate",     issuer: "Cisco", year: "2023" },
+  { badge: "KCNA", name: "Kuberneted and Cloud Native Associate", issuer: "Linux Foundation",          year: "2025" },
+  { badge: "SC-900",   name: "Microsoft Certified: Security, Compliance, and Identity Fundamentals",                      issuer: "Microsoft",         year: "2025" },
 ];
 
 // ─── VOLUNTEER ────────────────────────────────────────────────
@@ -178,21 +178,22 @@ export interface VolunteerRole {
 
 export const volunteer: VolunteerRole[] = [
   {
-    role:   "CTF Organizer & Challenge Author",
-    org:    "BSides [City]",
-    period: "2020 — present",
-    desc:   "Designed and authored 12+ CTF challenges across web exploitation, binary exploitation, and cryptography categories for the annual BSides security conference. Mentored first-time participants through workshops.",
-  },
-  {
-    role:   "Security Awareness Trainer",
-    org:    "CyberFirst NGO",
+    role:   "Project Representative",
+    org:    "IEEE Türkiye Twin Student Branches Project",
     period: "2019 — 2021",
-    desc:   "Delivered free cybersecurity awareness sessions to local small businesses and nonprofits, covering phishing, password hygiene, and social engineering defence. Reached 200+ participants.",
+    desc:   "Served as Student Liaison of IEEE Turkey's largest networking project, leading a 12-person team to build, monitor, and grow inter-university partnerships — including international outreach to expand the project globally.",
   },
   {
-    role:   "Open Source Contributor",
-    org:    "OWASP Foundation",
-    period: "2018 — present",
-    desc:   "Contributing member of the OWASP Testing Guide project — authored sections on API security testing and contributed code review checklist items adopted in the v4.2 release.",
+    role:   "Member",
+    org:    "Artificial Intelligence Security and Defence Lab (AISECLAB)",
+    period: "2023 — 2024",
+    desc:   "Participating in an organization at the intersection of AI and Cybersecurity, where I attend training sessions on cybersecurity, artificial intelligence, and cloud computing while volunteering on ongoing project development.",
   },
+  {
+    role:   "Volunteer",
+    org:    "IEEE",
+    period: "2018 — 2024",
+    desc:   "Five years of IEEE leadership across two student branches and the national Twin Student Branches Project, leading inter-branch collaboration and blog content."
+  },
+  
 ];
