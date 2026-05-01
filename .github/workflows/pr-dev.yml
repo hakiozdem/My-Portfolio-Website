@@ -3,7 +3,7 @@ name: PR Preview Deploy
 on:
   pull_request:
     branches:
-      - main
+      - master
     # PR açılma, güncellenme, ve tekrar açılmada tetikle
     # closed da ekleyebilirsin ama o zaman cleanup mantığı yazman gerekir
     types: [opened, synchronize, reopened]
