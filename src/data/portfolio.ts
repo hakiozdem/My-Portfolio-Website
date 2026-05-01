@@ -7,6 +7,7 @@ export const personal = {
   title:      "Identity Governance Analyst",
   bio:        "I break things so others can't. With 6+ years securing enterprise infrastructure, I specialize in offensive security, red team operations, and helping organizations understand their real attack surface before adversaries do.",
   location:   "Istanbul, Türkiye",
+  email:      "john@example.com",
   linkedin:   "https://www.linkedin.com/in/haktanozdemir",
   github:     "https://github.com/hakiozdem",
   available:  true,
@@ -20,7 +21,6 @@ export const skills: string[] = [
   "Advanced Excel Techniques (Macros, PowerQuery, PowerPivot)",
   "DevOps",
   "Cloud Security",
-  "Python / Bash",
 ];
 
 // highlight the first N skills with the accent color
