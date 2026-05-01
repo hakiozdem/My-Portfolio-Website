@@ -32,6 +32,8 @@ jobs:
       # 1. Repo'yu runner'a indir
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       # 2. Node.js kurulumu + npm cache
       # cache: 'npm' otomatik olarak package-lock.json'ı baz alıp cache yönetir
