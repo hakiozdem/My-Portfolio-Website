@@ -5,7 +5,7 @@
 export const personal = {
   name:       "Haktan Özdemir",
   title:      "Identity Governance Analyst",
-  bio:        "I break things so others can't. With 6+ years securing enterprise infrastructure, I specialize in offensive security, red team operations, and helping organizations understand their real attack surface before adversaries do.",
+  bio:        "I break things so others can't. With 6+ years securing enterprise infrastructure, I specialize in offensive security, red team operations, and helping organizations understand their real attack surface before adversaries do...",
   location:   "Istanbul, Türkiye",
   email:      "haktanozdem@gmail.com",
   linkedin:   "https://www.linkedin.com/in/haktanozdemir",
