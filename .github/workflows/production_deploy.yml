@@ -92,6 +92,8 @@ jobs:
       # dist/ klasörü oluşur
       - name: Build Astro site
         run: npm run build
+        env:
+          PUBLIC_COUNTER_API: ${{ vars.PUBLIC_COUNTER_API }}
 
       # 10. AWS credentials - OIDC ile role assume
       # Hiçbir secret access key kullanmıyoruz, federated identity
