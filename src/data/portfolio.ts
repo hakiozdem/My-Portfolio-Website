@@ -5,7 +5,7 @@
 export const personal = {
   name:       "Haktan Özdemir",
   title:      "Identity Governance Analyst",
-  bio:        "I break things so others can't. With 6+ years securing enterprise infrastructure, I specialize in offensive security, red team operations, and helping organizations understand their real attack surface before adversaries do..",
+  bio:        "I started in Materials Science, switched to Computer Engineering, and somewhere between an internship and a Kubernetes certification I fell into Identity Governance — the part of security that decides who gets to do what, and why. Today I'm an Analyst at Garanti BBVA, where I design RBAC models, risk-score entitlement changes, and write the Python and SQL that make access reviews actually reviewable. I'm based in Istanbul, certified across Cisco, Microsoft and the Linux Foundation, and most interested in the place where governance, automation, and cloud security meet.",
   location:   "Istanbul, Türkiye",
   email:      "haktanozdem@gmail.com",
   linkedin:   "https://www.linkedin.com/in/haktanozdemir",
@@ -110,6 +110,7 @@ export const projects: Project[] = [
     index:  "[01]",
     name:   "My Portfolio Website and Deployment Pipeline",
     desc:   "(github and blog will be Included soon)",
+    github: "https://github.com/hakiozdem/My-Portfolio-Website",
     stack:  ["Astro", "AWS", "Github Actions"],
   },
   {
