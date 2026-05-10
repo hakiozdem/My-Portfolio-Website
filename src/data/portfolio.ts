@@ -111,12 +111,14 @@ export const projects: Project[] = [
     name:   "My Portfolio Website and Deployment Pipeline",
     desc:   "(github and blog will be Included soon)",
     github: "https://github.com/hakiozdem/My-Portfolio-Website",
+    blog: "https://medium.com/@haktanozdem/building-my-resume-site-on-aws-part-1-manual-deployment-to-s3-ae570b2040ae",
     stack:  ["Astro", "AWS", "Github Actions"],
   },
   {
     index:  "[02]",
     name:   "Open-Source and Cheap CI/CD Pipeline for Small Companies",
     desc:   "Completely automated CI/CD Pipeline and deployed a website which contains its own authorization system. (github will be added soon)",
+    github: "https://github.com/hakiozdem/Graduation-Project-2",
     stack:  ["Python-Flask", "Vagrant", "Jenkins","SonarQube","Kubernetes","Docker"],
   },
   {
