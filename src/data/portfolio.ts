@@ -102,6 +102,7 @@ export interface Project {
   github?: string;
   demo?:   string;
   blog?:   string;
+  blog2?:   string;
   writeup?: string;
 }
 
@@ -109,15 +110,16 @@ export const projects: Project[] = [
   {
     index:  "[01]",
     name:   "My Portfolio Website and Deployment Pipeline",
-    desc:   "(github and blog will be Included soon)",
+    desc:   "A website that deployed on AWS automatically with Github Actions. And holds visitor count via AWS Lambda and API-Gateway. Blog articles are included.",
     github: "https://github.com/hakiozdem/My-Portfolio-Website",
     blog: "https://medium.com/@haktanozdem/building-my-resume-site-on-aws-part-1-manual-deployment-to-s3-ae570b2040ae",
+    blog2: "https://medium.com/@haktanozdem/building-my-resume-site-on-aws-part-2-github-workflow-and-visitor-counter-803f810eb3dd",
     stack:  ["Astro", "AWS", "Github Actions"],
   },
   {
     index:  "[02]",
     name:   "Open-Source and Cheap CI/CD Pipeline for Small Companies",
-    desc:   "Completely automated CI/CD Pipeline and deployed a website which contains its own authorization system. (github will be added soon)",
+    desc:   "Completely automated CI/CD Pipeline and deployed a website which contains its own authorization system. Besides, IaC practices are applied via Vagrant.",
     github: "https://github.com/hakiozdem/Graduation-Project-2",
     stack:  ["Python-Flask", "Vagrant", "Jenkins","SonarQube","Kubernetes","Docker"],
   },
