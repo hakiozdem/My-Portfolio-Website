@@ -114,7 +114,7 @@ export const projects: Project[] = [
     github: "https://github.com/hakiozdem/My-Portfolio-Website",
     blog: "https://medium.com/@haktanozdem/building-my-resume-site-on-aws-part-1-manual-deployment-to-s3-ae570b2040ae",
     blog2: "https://medium.com/@haktanozdem/building-my-resume-site-on-aws-part-2-github-workflow-and-visitor-counter-803f810eb3dd",
-    stack:  ["Astro", "AWS", "Github Actions"],
+    stack:  ["Astro", "AWS", "GitHub Actions"],
   },
   {
     index:  "[02]",
@@ -125,6 +125,19 @@ export const projects: Project[] = [
   },
   {
     index:  "[03]",
+    name:   "Container Image Security Scanner Pipeline",
+    desc:   "A demonstration of container security scanning with Aqua Security Trivy for Dockerfiles and images, integrated into a GitHub Actions workflow.",
+    stack:  ["Trivy","GitHub Actions","FastAPI"],
+    github: "https://github.com/hakiozdem/Container-Image-Security-Scanner-Pipeline",
+  },
+  {
+    index:  "[04]",
+    name:   "Secret Management with SOPS & age",
+    desc:   "Will be added soon...",
+    stack:  ["SOPS","age","GitHub Actions","FastAPI"],
+  },
+  {
+    index:  "[05]",
     name:   "Türk Telekom Cloud Computing Camp Final Project",
     desc:   "Manuel deployment of a website with Docker & Kubernetes",
     stack:  ["Python-Flask","Kubernetes","Docker"],
