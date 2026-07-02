@@ -133,8 +133,9 @@ export const projects: Project[] = [
   {
     index:  "[04]",
     name:   "Secret Management with SOPS & age",
-    desc:   "Will be added soon...",
-    stack:  ["SOPS","age","GitHub Actions","FastAPI"],
+    desc:   "Git-native secrets management using SOPS and age — encrypted secrets live in version control, plaintext never does.",
+    stack:  ["SOPS","age","GitHub Actions","FastAPI","Pre-commit"],
+    github: "https://github.com/hakiozdem/sops-secret-management"
   },
   {
     index:  "[05]",
@@ -198,7 +199,7 @@ export const volunteer: VolunteerRole[] = [
   {
     role:   "Project Representative",
     org:    "IEEE Türkiye Twin Student Branches Project",
-    period: "2019 — 2021",
+    period: "2021 — 2022",
     desc:   "Served as Student Liaison of IEEE Turkey's largest networking project, leading a 12-person team to build, monitor, and grow inter-university partnerships — including international outreach to expand the project globally.",
   },
   {
