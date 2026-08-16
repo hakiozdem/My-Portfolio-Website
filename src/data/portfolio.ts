@@ -156,6 +156,12 @@ export interface Degree {
 
 export const education: Degree[] = [
   {
+    period:      "2026–2027",
+    degree:      "Cyber Security (Masters Degree without Thesis)",
+    institution: "Marmara University",
+    note:        "Started this year",
+  },
+  {
     period:      "2020–2024",
     degree:      "Bachelor of Computer Engineering",
     institution: "Manisa Celal Bayar University",
