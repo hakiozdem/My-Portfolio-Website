@@ -185,6 +185,7 @@ export const certifications: Cert[] = [
   { badge: "CCNA",  name: "Cisco Certified Network Associate",     issuer: "Cisco", year: "2023" },
   { badge: "KCNA", name: "Kuberneted and Cloud Native Associate", issuer: "Linux Foundation",          year: "2025" },
   { badge: "SC-900",   name: "Microsoft Certified: Security, Compliance, and Identity Fundamentals",                      issuer: "Microsoft",         year: "2025" },
+  {badge: "KCSA", name: "Kubernetes and Cloud Native Security Associate", issuer: "Linux Foundation", year:"in progress"}
 ];
 
 // ─── VOLUNTEER ────────────────────────────────────────────────
